@@ -19,8 +19,8 @@ export default function Home() {
       const response = await fetch(`/api/armada/${id}`)
       const res = await response.json()
       const jsonMimeType = 'application/json'
-      const encoded = res.data.replace(`data:${jsonMimeType};base64,`, '')
-      const metadata = JSON.parse(atob(encoded))
+      const encoded = res.data.split(',')[1]
+      const metadata = JSON.parse(Buffer.from(encoded, 'base64').toString('utf8'))
       setTokenData(metadata.image_data)
     }
 
@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-4 ${inter.className}`}>
+      className={`dark flex min-h-screen flex-col items-center p-4 ${inter.className} bg-[url('/panel.png')]`}>
       {tokenId !== null && (
         <form className='max-w-sm mx-auto my-4' onSubmit={download}>
           <div className='mb-5'>
@@ -81,14 +81,14 @@ export default function Home() {
               required
             />
           </div>
-          <button
-            type='submit'
-            className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
-            Download PNG
+          <button type="submit" href="#_" className="relative px-6 py-3 font-bold text-white rounded-lg group uppercase">
+            <span className="absolute inset-0 w-full h-full transition duration-300 transform -translate-x-1 -translate-y-1 bg-purple-800 ease opacity-80 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+            <span className="absolute inset-0 w-full h-full transition duration-300 transform translate-x-1 translate-y-1 bg-pink-800 ease opacity-80 group-hover:translate-x-0 group-hover:translate-y-0 mix-blend-screen"></span>
+            <span className="relative">Download PNG</span>
           </button>
         </form>
       )}
-      <canvas width='1200' height='1200' ref={canvasRef} />
+      <canvas width='1200' height='1200' ref={canvasRef} className='w-[400px] h-[400px]' />
     </main>
   )
 }
