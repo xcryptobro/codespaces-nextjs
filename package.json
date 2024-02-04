@@ -6,8 +6,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "ethers": "^6.10.0",
+    "file-saver": "^2.0.5",
     "next": "^13.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1"
   }
 }
